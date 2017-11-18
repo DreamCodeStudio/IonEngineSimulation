@@ -47,6 +47,23 @@ int main()
 	sf::Clock timer;
 	timer.restart();
 
+	/* ########################################### Create GUI ########################################### */
+	irr::gui::IGUIEnvironment *gui = manager->getGUIEnvironment();
+	irr::gui::IGUIFont *font = gui->getFont("Data\\Font\\rpgfont.xml");
+	gui->getSkin()->setFont(font);
+
+	irr::gui::IGUIScrollBar *scrollBarVolt = gui->addScrollBar(true, irr::core::rect<irr::s32>(10, 10, 300, 30), 0, -1);
+	scrollBarVolt->setMax(150);
+	scrollBarVolt->setMin(99);
+	scrollBarVolt->setPos(101);
+	gui->addStaticText(irr::core::stringw("Spannung in V Min: 0 V Max: 1000 V").c_str(), irr::core::rect<irr::s32>(320, 10, 540, 30), true, true, 0, -1, false);
+	
+	irr::gui::IGUIScrollBar *scrollBarAmount = gui->addScrollBar(true, irr::core::rect<irr::s32>(10, 70, 300, 90), 0, -1);
+	scrollBarAmount->setMax(20);
+	scrollBarAmount->setMin(1);
+	gui->addStaticText(irr::core::stringw("Anzahl Ionen pro Sekunde in *10^13 Min: 0 Max: 1 * 10^15 ").c_str(), irr::core::rect<irr::s32>(320, 70, 670, 90), true, true, 0, -1, false);
+
+
 	/* ########################################### Main Loop ########################################### */
 	while (device->run())
 	{
@@ -55,10 +72,14 @@ int main()
 
 		/* Draw all the added objects */
 		manager->drawAll();
+		gui->drawAll();
 
 		/* Update */
 		light1->setPosition(camera->getPosition());
 		updateIons(manager, ionMesh, &ions, &ionsVelocity, &timer, ionsPerSecond, acceleration);
+
+		acceleration = scrollBarVolt->getPos() / 100.0f;
+		ionsPerSecond = scrollBarAmount->getPos();
 
 		driver->endScene();
 	}
