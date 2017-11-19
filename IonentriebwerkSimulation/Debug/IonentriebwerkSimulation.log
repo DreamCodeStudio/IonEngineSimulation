@@ -1,3 +1,2 @@
-﻿D:\VisualStudio 2017\Common7\IDE\VC\VCTargets\Microsoft.CppClean.targets(76,5): warning : Der Prozess kann nicht auf die Datei "c:\users\micha\desktop\ionentriebwerksimulation\ionentriebwerksimulation\debug\ionentri.03306ebc.tlog\link.write.1.tlog" zugreifen, da sie von einem anderen Prozess verwendet wird.
-  main.cpp
+﻿  main.cpp
   IonentriebwerkSimulation.vcxproj -> C:\Users\micha\Desktop\IonentriebwerkSimulation\Debug\IonentriebwerkSimulation.exe
